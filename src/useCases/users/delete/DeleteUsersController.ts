@@ -9,7 +9,7 @@ export class DeleteUsersController {
 
     controller = async (request: Request, response: Response) => {
         const userId = request.params.userId as string;
-        const userRequest = request.params.userRequest as string;
+        const userRequest = request.params.userAction as string;
 
         try {
             const deletedUsers = await this.deleteUsersUseCase.execute(userId, userRequest);

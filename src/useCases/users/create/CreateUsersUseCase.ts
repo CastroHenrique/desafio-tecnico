@@ -23,6 +23,11 @@ export class CreateUsersUseCase {
             throw new Error("Dados obrigatórios não informados");
         };
 
+        if(userData.password !== userData.confirmPassword) {
+            trx.rollback();
+            throw new Error("As senhas não conferem");
+        }
+
         //check if user with same username or email already exists
 
         const userWithSameUsername = await (async () => {

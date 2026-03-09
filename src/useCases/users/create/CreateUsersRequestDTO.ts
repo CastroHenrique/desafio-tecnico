@@ -4,6 +4,7 @@ export interface CreateUsersRequestDTO {
     name: string;
     username: string;
     password?: string;
+    confirmPassword?: string;
     document: string;
     email?: string;
     accessLevel: AccessLevel;

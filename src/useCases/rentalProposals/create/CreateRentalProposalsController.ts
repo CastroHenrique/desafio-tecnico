@@ -4,9 +4,11 @@ import { CreateRentalProposalsUseCase } from "./CreateRentalProposalsUseCase";
 
 export class CreateRentalProposalsController {
 
-    constructor(private createRentalProposalsUseCase: CreateRentalProposalsUseCase) {}
+    constructor(private createRentalProposalsUseCase: CreateRentalProposalsUseCase) {
+        this.controller.bind(this);
+    }
 
-    execute = async (response: Response, request: Request) => {
+    controller = async (request: Request, response: Response) => {
         const data = request.body;
 
         try {  

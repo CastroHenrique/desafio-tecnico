@@ -8,6 +8,16 @@ export enum RentalProposalsStatus {
     CANCELADA = "CANCELADA",
 }
 
+export const VALID_TRANSITIONS: Record<RentalProposalsStatus, RentalProposalsStatus[]> = {
+    [RentalProposalsStatus.NOVA]: [RentalProposalsStatus.ANALISE_CREDITO, RentalProposalsStatus.CANCELADA],
+    [RentalProposalsStatus.ANALISE_CREDITO]: [RentalProposalsStatus.CONTRATO_EMITIDO, RentalProposalsStatus.REPROVADA, RentalProposalsStatus.CANCELADA],
+    [RentalProposalsStatus.CONTRATO_EMITIDO]: [RentalProposalsStatus.ASSINADO, RentalProposalsStatus.CANCELADA],
+    [RentalProposalsStatus.ASSINADO]: [RentalProposalsStatus.ATIVO, RentalProposalsStatus.CANCELADA],
+    [RentalProposalsStatus.ATIVO]: [],
+    [RentalProposalsStatus.REPROVADA]: [],
+    [RentalProposalsStatus.CANCELADA]: [],
+};
+
 export class RentalProposalsEntity {
     id!: string;
     propertyId!: string;

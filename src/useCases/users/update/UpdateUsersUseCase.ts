@@ -13,14 +13,14 @@ export class UpdateUsersUseCase {
 
         //check if all required fields are provided
 
-        if(userData.id || !userData.name || !userData.email || !userData.username || !userData.document) {
+        if(!userData.id || !userData.name || !userData.email || !userData.username || !userData.document) {
             trx.rollback();
             throw new Error("Dados obrigatórios não informados");
         };
 
-        if(userData.password && userData.password === "") {
+        if(userData.password !== undefined && userData.password === "") {
             trx.rollback();
-            throw new Error("Senha não informada");
+            throw new Error("Senha inválida");
         }
 
         //find old user

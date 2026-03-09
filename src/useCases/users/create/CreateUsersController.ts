@@ -14,8 +14,7 @@ export class CreateUsersController {
         const userData = request.body;
 
         try {
-            console.log("Creating user");
-            
+          
             const user = await this.createUsersUseCase.execute(userData);
 
             response.status(201).json({

@@ -50,6 +50,7 @@ export class MySqlUsersRepository implements IUsersRepository {
                 document: user.document,
                 email: user.email,
                 accessLevel: user.accessLevel,
+                status: user.status,
             });
         } else {
             if(!user.id || user.id === "") user.id = uuidv4();
@@ -63,10 +64,14 @@ export class MySqlUsersRepository implements IUsersRepository {
                 document: user.document,
                 email: user.email,
                 accessLevel: user.accessLevel,
+                status: user.status,
             });
         }
 
-        return user;
+        return {
+            ...user,
+            status: user.status ? true : false,
+        };
 
     }
     public async remove(id: string, userId: string, trx?: Knex.Transaction): Promise<boolean> {

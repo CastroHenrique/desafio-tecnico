@@ -6,18 +6,24 @@ export class ListStatusHistoryUseCase {
     ) {}
     
     async execute(rentalProposalId: string) {
-        try {
-            const proposalStatusHistories = await this.rentalProposalsRepository.findProposalStatusHistoryByRentalProposalId(rentalProposalId);
-            if(!proposalStatusHistories) throw new Error("Histórico de status da proposta de aluguel não encontrado");
+        
 
-            
-            return proposalStatusHistories.map((proposalStatusHistory) => {
-                const { createdAt, deletedAt,deletedBy, ...proposalStatusHistoryToReturn } = proposalStatusHistory;
-                return proposalStatusHistoryToReturn;
-            });
-        } catch (err: any) {
-            throw new Error(err.message || "Erro ao listar histórico de status da proposta de aluguel");
+        const proposalStatusHistories = await (async () => {
+            try {
+                return await this.rentalProposalsRepository.findProposalStatusHistoryByRentalProposalId(rentalProposalId);
+            } catch (err: any) {
+                throw new Error(err.message || "Erro ao listar histórico de status da proposta de aluguel");
+            }
+        })();
+
+        if(!proposalStatusHistories) {
+            throw new Error("Histórico de status da proposta de aluguel não encontrado");
         }
+        
+        return proposalStatusHistories.map((proposalStatusHistory) => {
+            const { createdAt, deletedAt,deletedBy, ...proposalStatusHistoryToReturn } = proposalStatusHistory;
+            return proposalStatusHistoryToReturn;
+        });
     };
 
 }

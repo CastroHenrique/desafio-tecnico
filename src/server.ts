@@ -1,9 +1,9 @@
 import { Server } from "node:http";
-import { app } from "./app";
 import dotenv from "dotenv";
+import { app } from "./app";
 
 if (process.env.NODE_ENV !== "production") {
-    dotenv.config();
+  dotenv.config();
 }
 
 const server = new Server(app);
@@ -11,8 +11,7 @@ const server = new Server(app);
 const port = process.env.SERVER_OUTPUT_PORT || 80;
 
 server.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-})
+  console.log(`Server is running on port ${port}`);
+});
 
 export { server };
-

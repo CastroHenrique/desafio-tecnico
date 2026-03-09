@@ -1,4 +1,4 @@
-import { PropertiesEntity, PropertiesStatus } from "../../../entities/PropertiesEntity";
+import { PropertiesEntity } from "../../../entities/PropertiesEntity";
 import knex from "../../../knex";
 import { IPropertiesRepository } from "../../../repositories/properties/IPropertiesRepository";
 import { UpdatePropertiesRequestDTO } from "./UpdatePropertiesRequestDTO";
@@ -9,8 +9,8 @@ export class UpdatePropertiesUseCase {
 
     async execute(propertyData: UpdatePropertiesRequestDTO) {
         const trx = await knex.transaction();
-
-        if(!propertyData.price || !propertyData.addressZipCode || !propertyData.addressStreet || !propertyData.addressNumber || !propertyData.addressNeighborhood || !propertyData.addressCity || !propertyData.addressState || !propertyData.reference) {
+        
+        if(!propertyData.price || !propertyData.addressZipCode || !propertyData.addressStreet || !propertyData.addressNumber || !propertyData.addressNeighborhood || !propertyData.addressCity || !propertyData.addressState) {
             trx.rollback();
             throw new Error("Dados obrigatórios não informados");
         }

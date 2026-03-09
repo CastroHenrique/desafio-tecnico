@@ -1,5 +1,5 @@
 import knex from "../../knex";
-import type { PropertiesEntity } from "../../entities/PropertiesEntity";
+import type { PropertiesEntity, PropertiesStatus } from "../../entities/PropertiesEntity";
 import type { IPropertiesRepository } from "./IPropertiesRepository";
 import type { Knex } from "knex";
 import { v4 as uuidv4 } from "uuid";
@@ -57,7 +57,8 @@ export class MySqlPropertiesRepository implements IPropertiesRepository {
                 addressNeighborhood: property.addressNeighborhood,
                 addressCity: property.addressCity,
                 addressState: property.addressState,
-                status: property.status,
+                status: property.status as PropertiesStatus,
+                fullAddress: property.fullAddress,
             });
         } else {
             if(!property.id || property.id === "") property.id = uuidv4();
@@ -72,7 +73,8 @@ export class MySqlPropertiesRepository implements IPropertiesRepository {
                 addressNeighborhood: property.addressNeighborhood,
                 addressCity: property.addressCity,
                 addressState: property.addressState,
-                status: property.status,
+                status: property.status as PropertiesStatus,
+                fullAddress: property.fullAddress,
             });
         }
         return property;

@@ -12,7 +12,7 @@ export class CreatePropertiesUseCase {
 
         //check if all required fields are provided
 
-        if(!propertyData.price || !propertyData.addressZipCode || !propertyData.addressStreet || !propertyData.addressNumber || !propertyData.addressNeighborhood || !propertyData.addressCity || !propertyData.addressState || !propertyData.reference) {
+        if(!propertyData.price || !propertyData.addressZipCode || !propertyData.addressStreet || !propertyData.addressNumber || !propertyData.addressNeighborhood || !propertyData.addressCity || !propertyData.addressState) {
             trx.rollback();
             throw new Error("Dados obrigatórios não informados");
         }
@@ -56,7 +56,7 @@ export class CreatePropertiesUseCase {
                 return await this.propertiesRepository.save(propertyToSave, trx);
             } catch (err: any) {
                 trx.rollback();
-                throw new Error("Erro ao salvar propriedade");
+                throw new Error("Erro ao salvar propriedade no banco de dados");
             }
         })();
 

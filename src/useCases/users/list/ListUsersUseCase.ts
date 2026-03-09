@@ -18,6 +18,9 @@ export class ListUsersUseCase {
             }
         })();
 
-        return user;
+        return user?.map(user => {
+            const { password,createdAt,updatedAt,deletedAt,deletedBy, ...userWithoutPassword } = user;
+            return userWithoutPassword;
+        });
     }
 }   

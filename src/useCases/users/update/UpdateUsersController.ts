@@ -8,7 +8,7 @@ export class UpdateUsersController {
 
     controller = async (request: Request, response: Response) => {
         const userData = request.body;
-
+        
         try {
             const users = await this.updateUsersUseCase.execute(userData);
 

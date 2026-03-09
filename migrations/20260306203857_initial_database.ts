@@ -41,7 +41,7 @@ export async function up(knex: Knex): Promise<void> {
     await knex.schema.createTable("properties", (table) => {
         table.engine("InnoDB");
         table.string("id", 36).primary();
-        table.integer("reference").unsigned().notNullable().unique().index();
+        table.specificType("reference", "INT UNSIGNED AUTO_INCREMENT UNIQUE NOT NULL");
         table.decimal("price", 10, 2).notNullable().defaultTo(0);
         table.string("addressZipCode", 10).notNullable();
         table.string("addressStreet", 100).notNullable();
